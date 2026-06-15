@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ app_name }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', path='/style.css') }}">
+</head>
+<body>
+    <main class="page-shell">
+        <section class="dashboard-card" aria-labelledby="dashboard-title">
+            <div class="card-header">
+                <div>
+                    <p class="eyebrow">Sample application</p>
+                    <h1 id="dashboard-title">{{ app_name }}</h1>
+                </div>
+                <span class="status-pill" aria-label="Application status {{ status }}">
+                    <span class="status-dot"></span>
+                    {{ status }}
+                </span>
+            </div>
+
+            <div class="metrics-grid">
+                <article class="metric">
+                    <span class="metric-label">Version</span>
+                    <strong>{{ version }}</strong>
+                </article>
+                <article class="metric">
+                    <span class="metric-label">Server Time</span>
+                    <strong>{{ current_time }}</strong>
+                </article>
+                <article class="metric">
+                    <span class="metric-label">Current Date</span>
+                    <strong>{{ current_date }}</strong>
+                </article>
+            </div>
+
+            <button class="refresh-button" type="button" onclick="window.location.reload()">
+                Refresh
+            </button>
+        </section>
+    </main>
+</body>
+</html>
