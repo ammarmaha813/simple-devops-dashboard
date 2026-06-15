@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: simple-devops-dashboard
+  labels:
+    app: simple-devops-dashboard
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: /health
+spec:
+  type: LoadBalancer
+  selector:
+    app: simple-devops-dashboard
+  ports:
+    - port: 80
+      targetPort: 8000
+      protocol: TCP

@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: simple-devops-dashboard
+  labels:
+    app: simple-devops-dashboard
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: simple-devops-dashboard.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: simple-devops-dashboard
+                port:
+                  number: 80

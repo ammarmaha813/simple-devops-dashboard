@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-devops-dashboard
+  labels:
+    app: simple-devops-dashboard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simple-devops-dashboard
+  template:
+    metadata:
+      labels:
+        app: simple-devops-dashboard
+    spec:
+      containers:
+        - name: simple-devops-dashboard
+          image: IMAGE_TAG
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 30
+            periodSeconds: 10
