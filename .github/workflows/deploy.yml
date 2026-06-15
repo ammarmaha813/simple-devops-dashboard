@@ -30,7 +30,7 @@ jobs:
         run: |
           pip install pytest
           if [ -d "tests" ] || find . -name "test_*.py" -not -path "./.git/*" | grep -q .; then
-            pytest --tb=short
+            python -m pytest --tb=short
           else
             echo "Aucun test trouvé — étape ignorée"
           fi
