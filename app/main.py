@@ -5,12 +5,17 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
+from prometheus_fastapi_instrumentator import Instrumentator
+
 
 APP_NAME = "DevOps Dashboard"
 APP_VERSION = "1.0.0"
 APP_STATUS = "healthy"
 
 app = FastAPI(title=APP_NAME, version=APP_VERSION)
+
+# 🔥 Prometheus metrics instrumentation
+Instrumentator().instrument(app).expose(app)
 
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 templates = Jinja2Templates(directory="app/templates")
